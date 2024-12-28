@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://hxx4okc521ab"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 483.0
+offset_top = 261.0
+offset_right = 687.0
+offset_bottom = 433.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.041
+offset_top = 36.0
+offset_right = 63.0
+offset_bottom = 59.948
+text = "Play"
+
+[node name="Button2" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 74.0
+offset_right = 63.0
+offset_bottom = 105.0
+text = "Quit"

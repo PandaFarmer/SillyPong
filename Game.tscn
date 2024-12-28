@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=3 uid="uid://chwcw47hwteg4"]
+
+[ext_resource type="PackedScene" uid="uid://c4h2g1gsb5rk4" path="res://Meshes/OrcLeft.glb" id="1_c815k"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_nkh86"]
+[ext_resource type="PackedScene" uid="uid://bumvk8bglt2la" path="res://Meshes/OrcRight.glb" id="2_p4twc"]
+[ext_resource type="PackedScene" uid="uid://t0k0je7ug1el" path="res://Meshes/Ahegao.glb" id="3_uesjl"]
+[ext_resource type="PackedScene" uid="uid://0v561gonkvs7" path="res://Meshes/AngryElf.glb" id="4_l2t7e"]
+[ext_resource type="Script" path="res://Scripts/Ball.cs" id="5_gbdiy"]
+[ext_resource type="PackedScene" uid="uid://diilpgw1h784g" path="res://Meshes/Bounds.glb" id="7_2kqbk"]
+[ext_resource type="Script" path="res://Scripts/ScoreKeeper.cs" id="8_bw6e2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6pnh"]
+size = Vector3(1, 0.5, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_coe52"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mbtg8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44mjt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0fwu8"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t26c2"]
+size = Vector3(0.1, 1, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_nkh86")
+metadata/Name = "Player2"
+
+[node name="Player2Collider" type="CollisionShape3D" parent="Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+shape = SubResource("BoxShape3D_d6pnh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.3, 0, 0, -2.9566)
+material_override = SubResource("StandardMaterial3D_coe52")
+mesh = SubResource("BoxMesh_mbtg8")
+
+[node name="Orc" parent="Player2" instance=ExtResource("2_p4twc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -2.45188)
+
+[node name="Player1" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.94752)
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_nkh86")
+metadata/Name = "Player1"
+
+[node name="Player1Collider" type="CollisionShape3D" parent="Player1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+shape = SubResource("BoxShape3D_d6pnh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player1"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.3, 0, 0, 2.94984)
+material_override = SubResource("StandardMaterial3D_44mjt")
+mesh = SubResource("BoxMesh_mbtg8")
+
+[node name="Orc" parent="Player1" instance=ExtResource("1_c815k")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 2.45292)
+
+[node name="Ball" type="CharacterBody3D" parent="."]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("5_gbdiy")
+metadata/Name = "Ball"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("BoxShape3D_0fwu8")
+
+[node name="Ahegao" parent="Ball" instance=ExtResource("3_uesjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.203028, 0, 0)
+
+[node name="AngryElf" parent="Ball" instance=ExtResource("4_l2t7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.196462, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 6.03944, 0)
+projection = 1
+size = 5.0
+far = 600.0
+
+[node name="Wall1RigidBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55032, 0, 0)
+metadata/Name = "Wall1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall1RigidBody3D"]
+shape = SubResource("BoxShape3D_t26c2")
+
+[node name="Bounds" parent="Wall1RigidBody3D" instance=ExtResource("7_2kqbk")]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 5, 0.0616759, -1.72013, 0)
+
+[node name="Wall2RigidBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.44968, 0, 0)
+metadata/Name = "Wall2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2RigidBody3D"]
+shape = SubResource("BoxShape3D_t26c2")
+
+[node name="Bounds" parent="Wall2RigidBody3D" instance=ExtResource("7_2kqbk")]
+transform = Transform3D(0.05, 0, 0, 0, 1, 0, 0, 0, 5, 0.215608, -1.72013, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+
+[node name="ScoreKeeper2" type="Node2D" parent="."]
+script = ExtResource("8_bw6e2")
+
+[node name="Score1" type="RichTextLabel" parent="ScoreKeeper2"]
+anchors_preset = -1
+anchor_right = 0.6
+anchor_bottom = 0.5
+offset_left = 394.0
+offset_top = 593.0
+offset_right = 429.0
+offset_bottom = 623.0
+text = "1"
+
+[node name="Score2" type="RichTextLabel" parent="ScoreKeeper2"]
+offset_left = 713.0
+offset_top = 590.0
+offset_right = 753.0
+offset_bottom = 622.0
+text = "2"
